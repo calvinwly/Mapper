@@ -3,9 +3,26 @@
     <string name="edit_location">Enter a location</string>
     <string name="button_enter">Enter</string>
     <string name="title_activity_maps">Map</string>
+    <string name="history">History</string>
+    <string name="no_history">No Previous Searches</string>
     <string-array name="suggestions">
         <item>1600 Amphitheatre Parkway</item>
         <item>1600 Pennsylvania Avenue</item>
         <item>110 Inner Campus Drive, Austin, TX 78705</item>
+        <item>11 Wall Street New York</item>
+        <item>350 Fifth Avenue New York, NY 10118</item>
+        <item>221 B Baker St, London, England</item>
+        <item>Tour Eiffel Champ de Mars, Paris</item>
+        <item>4059 Mt Lee Dr. Hollywood, CA 90068</item>
+        <item>Buckingham Palace, London, England</item>
+        <item>Statue of Liberty, Liberty Island New York, NY 10004</item>
+        <item>Manager Square, Bethlehem, West Bank</item>
+        <item>2 Macquarie Street, Sydney</item>
+        <item>Canal Street, New Orleans, LA</item>
+        <item>Delaware Avenue, Buffalo, NY</item>
+        <item>Las Vegas Boulevard, Las Vegas, NV</item>
+        <item>Fifth Avenue, New York, NY</item>
+        <item>Vermont Street, San Francisco, CA</item>
+        <item>Mulholland Drive, Los Angeles, CA</item>
     </string-array>
 </resources>

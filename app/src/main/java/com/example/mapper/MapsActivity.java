@@ -1,5 +1,7 @@
 package com.example.mapper;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -17,7 +19,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-    int MAX_RESULTS = 1;
+    int MAX_RESULTS = 5;
     private GoogleMap mMap;
 
     @Override
@@ -52,18 +54,44 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         geocoder = new Geocoder(this, Locale.getDefault());
         try {
             addresses = geocoder.getFromLocationName(location, MAX_RESULTS);
-            LatLng loc = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
-            mMap.addMarker(new MarkerOptions().position(loc).title(addresses.get(0).getAddressLine(0)));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
+            if (addresses.size() == 0) {
+                AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+
+                dlgAlert.setMessage("No results!");
+                dlgAlert.setTitle("Error");
+                dlgAlert.setCancelable(false);
+                dlgAlert.setPositiveButton("Return to Search",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });
+                dlgAlert.create().show();
+                return;
+            }
+            Address main = addresses.get(0);
+            LatLng main_loc = new LatLng(main.getLatitude(), main.getLongitude());
+            for (Address a : addresses) {
+                LatLng loc = new LatLng(a.getLatitude(), a.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(loc).title(a.getAddressLine(0)));
+            }
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(main_loc));
         } catch (Exception e) {
             e.printStackTrace();
             //TODO: add new intent to display error message to user
-            throw new IllegalArgumentException("location Name cannot be null");
+            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+
+            dlgAlert.setMessage("Something went wrong!");
+            dlgAlert.setTitle("Error");
+            dlgAlert.setCancelable(false);
+            dlgAlert.setPositiveButton("Return to Search",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+            dlgAlert.create().show();
+            return;
         }
-        /*
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }
 }
