@@ -6,17 +6,19 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    public final static String EXTRA_LOCATION = "com.example.myfirstapp.LOCATION";
+    public final static String EXTRA_LOCATION = "com.example.mapper.LOCATION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EditText editText = (EditText) findViewById(R.id.edit_location);
+        AutoCompleteTextView editText = (AutoCompleteTextView) findViewById(R.id.edit_location);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -28,10 +30,14 @@ public class MainActivity extends AppCompatActivity {
                 return handled;
             }
         });
+        String[] suggestions = getResources().getStringArray(R.array.suggestions);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, suggestions);
+        editText.setAdapter(adapter);
     }
 
     public void searchLocation(View view) {
-        Intent intent = new Intent(this, DisplayMapActivity.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         EditText editText = (EditText) findViewById(R.id.edit_location);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_LOCATION, message);

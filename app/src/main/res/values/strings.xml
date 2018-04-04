@@ -2,4 +2,10 @@
     <string name="app_name">Mapper</string>
     <string name="edit_location">Enter a location</string>
     <string name="button_enter">Enter</string>
+    <string name="title_activity_maps">Map</string>
+    <string-array name="suggestions">
+        <item>1600 Amphitheatre Parkway</item>
+        <item>1600 Pennsylvania Avenue</item>
+        <item>110 Inner Campus Drive, Austin, TX 78705</item>
+    </string-array>
 </resources>
