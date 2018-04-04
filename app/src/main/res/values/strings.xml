@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Mapper</string>
+    <string name="edit_location">Enter a location</string>
+    <string name="button_enter">Enter</string>
+</resources>
